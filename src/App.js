@@ -8,8 +8,7 @@ import { useEffect, useState } from 'react';
 
 
 function App() {
-  let url = "https://covid19.mathdro.id/api"
-
+  
   const [country, setCountry] = useState("");
   const [data, setData] = useState({
     confirmed: {
@@ -22,12 +21,13 @@ function App() {
       value: 0
     }
   });
-
+  
   const handleCountryChage = (country) => {
     setCountry(country)
   }
-
+  
   useEffect(() => {
+    let url = "https://covid19.mathdro.id/api";
     if (country) {
       url = url + `/countries/${country}`
     }
