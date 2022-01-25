@@ -1,24 +1,52 @@
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
+import Header from './Components/Header';
+import SearchBar from './Components/SearchBar';
+import Cards from './Components/Cards';
+import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+
 
 function App() {
+  let url = "https://covid19.mathdro.id/api"
+
+  const [country, setCountry] = useState("");
+  const [data, setData] = useState({
+    confirmed: {
+      value: 0
+    },
+    recovered: {
+      value: 0
+    },
+    deaths: {
+      value: 0
+    }
+  });
+
+  const handleCountryChage = (country) => {
+    setCountry(country)
+  }
+
+  useEffect(() => {
+    if (country) {
+      url = url + `/countries/${country}`
+    }
+    axios.get(url).then(
+      res => {
+        console.log(res.data);
+        setData(res.data);
+      }
+    )
+  }, [country]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Typography marginY={2} fontFamily={"cursive"} align='center' variant='h4' >COVID STATS</Typography>
+      <SearchBar handleCountryChage={handleCountryChage} />
+      <Cards data={data} />
+    </>
   );
 }
 
