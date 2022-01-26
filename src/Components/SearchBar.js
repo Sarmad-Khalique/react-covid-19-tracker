@@ -13,14 +13,14 @@ const SearchBar = ({ handleCountryChage }) => {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <FormControl variant="standard" sx={{ minWidth: 300, m: 3 }}>
+      <FormControl variant="standard" sx={{ minWidth: 200, m: 3 }}>
         <NativeSelect
           defaultValue=""
           onChange={(e) => handleCountryChage(e.target.value)}
         >
           {countries.length > 0 ? (
             countries.map((country, key) => (
-              <option className="countryOption" key={key} value={country.iso3}>
+              <option className="countryOption" key={key} value={country.name}>
                 {country.name}
               </option>
             ))
