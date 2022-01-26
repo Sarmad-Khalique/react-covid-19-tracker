@@ -2,7 +2,7 @@ import { Toolbar, AppBar, Typography } from "@mui/material";
 
 const Header = () => {
   return (
-    <AppBar position="relative">
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">
           COVID-19 Tracker BY M Sarmad Khalique

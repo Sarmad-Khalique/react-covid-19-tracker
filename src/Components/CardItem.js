@@ -3,7 +3,7 @@ import CountUp from 'react-countup';
 
 const CardItem = ({title, value, updatedOn}) => {
   return (
-    <Grid item xs={3}>
+    <Grid item xs={12} sm={3} md={3}>
       <Card variant="elevation">
         <Box marginX={1} marginY={1} textAlign={'center'}>
           <Typography variant="h5">
