@@ -44,7 +44,7 @@ function App() {
   return (
     <>
       <Header />
-      <Alert severity="info">For Best User Experience, We Recommend to use this site of Desktop or Laptops</Alert>
+      <Alert severity="info">For Best User Experience, We Recommend to use this site on Desktop or Laptops</Alert>
       <Box padding={2}>
         <Typography marginY={2} fontFamily={"cursive"} align='center' variant='h4' >COVID-19 STATS</Typography>
         <SearchBar handleCountryChage={handleCountryChage} />
