@@ -7,16 +7,19 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-const Chart = ({ data: { confirmed, recovered, deaths } , country}) => {
+import { Bar, Pie } from "react-chartjs-2";
+
+const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    ArcElement
   );
 
   const options = {
@@ -32,7 +35,21 @@ const Chart = ({ data: { confirmed, recovered, deaths } , country}) => {
     },
   };
 
+  const isMobile = window.screen.width <= "600";
+
   const labels = ["Conirmed", "Recovered", "Deaths"];
+
+  const barData = {
+    borderColor: [
+      "rgba(52, 152, 219)",
+      "rgba(255, 199, 132)",
+      "rgba(231, 76, 60)",
+    ],
+    borderWidth: 4,
+  };
+  const pieData = {
+    hoverOffset: 4,
+  };
 
   const graphData = {
     labels,
@@ -44,12 +61,7 @@ const Chart = ({ data: { confirmed, recovered, deaths } , country}) => {
           "rgba(255, 199, 132, 0.4)",
           "rgba(231, 76, 60, 0.4)",
         ],
-        borderColor: [
-          "rgba(52, 152, 219)",
-          "rgba(255, 199, 132)",
-          "rgba(231, 76, 60)",
-        ],
-        borderWidth: 4,
+        ...{ ...(isMobile ? barData : pieData) },
       },
     ],
   };
@@ -57,7 +69,11 @@ const Chart = ({ data: { confirmed, recovered, deaths } , country}) => {
   return (
     <Box marginY={3}>
       <Container>
-        <Bar options={options} data={graphData} />
+        {isMobile ? (
+          <Pie options={options} data={graphData} />
+        ) : (
+          <Bar options={options} data={graphData} />
+        )}
       </Container>
     </Box>
   );
